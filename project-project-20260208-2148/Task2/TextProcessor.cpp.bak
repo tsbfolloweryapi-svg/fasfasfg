@@ -3,16 +3,16 @@
 #include <locale>
 #include <cctype>
 
-// Создаёт частотный словарь слов из файла (кодировка CP1251)
-// Возвращает map<слово, частота>
+// РЎРѕР·РґР°С‘С‚ С‡Р°СЃС‚РѕС‚РЅС‹Р№ СЃР»РѕРІР°СЂСЊ СЃР»РѕРІ РёР· С„Р°Р№Р»Р° (РєРѕРґРёСЂРѕРІРєР° CP1251)
+// Р’РѕР·РІСЂР°С‰Р°РµС‚ map<СЃР»РѕРІРѕ, С‡Р°СЃС‚РѕС‚Р°>
 map<string, double> TextProcessor::makeWordsFrequencyDict(const string& fileName) {
     map<string, double> freqDict;
 
     fstream fs(fileName, ios::in);
     if (!fs.is_open()) {
-        throw runtime_error(string("TextProcessor: Не удалось открыть файл ") + fileName);
+        throw runtime_error(string("TextProcessor: РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» ") + fileName);
     }
-    // Указываем локаль для корректного чтения CP1251
+    // РЈРєР°Р·С‹РІР°РµРј Р»РѕРєР°Р»СЊ РґР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ С‡С‚РµРЅРёСЏ CP1251
     fs.imbue(locale(".1251"));
 
     int wordsCounter = 0;
@@ -40,9 +40,9 @@ map<string, double> TextProcessor::makeLettersFrequencyDict(const string& fileNa
 
     fstream fs(fileName, ios::in);
     if (!fs.is_open()) {
-        throw runtime_error(string("TextProcessor: Не удалось открыть файл ") + fileName);
+        throw runtime_error(string("TextProcessor: РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» ") + fileName);
     }
-    // Указываем локаль CP1251 — важно для корректной обработки русских символов
+    // РЈРєР°Р·С‹РІР°РµРј Р»РѕРєР°Р»СЊ CP1251 вЂ” РІР°Р¶РЅРѕ РґР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕР№ РѕР±СЂР°Р±РѕС‚РєРё СЂСѓСЃСЃРєРёС… СЃРёРјРІРѕР»РѕРІ
     fs.imbue(locale(".1251"));
 
     string text;
