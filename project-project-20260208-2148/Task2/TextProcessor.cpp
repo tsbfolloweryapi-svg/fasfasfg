@@ -3,14 +3,16 @@
 #include <locale>
 #include <cctype>
 
-// ��������� ��������� ������� ���� �� �����
+// Создаёт частотный словарь слов из файла (кодировка CP1251)
+// Возвращает map<слово, частота>
 map<string, double> TextProcessor::makeWordsFrequencyDict(const string& fileName) {
     map<string, double> freqDict;
 
     fstream fs(fileName, ios::in);
     if (!fs.is_open()) {
-        throw exception(("TextProcessor: �� ������� ������� ���� " + fileName).c_str());
+        throw runtime_error(string("TextProcessor: Не удалось открыть файл ") + fileName);
     }
+    // Указываем локаль для корректного чтения CP1251
     fs.imbue(locale(".1251"));
 
     int wordsCounter = 0;
@@ -38,8 +40,9 @@ map<string, double> TextProcessor::makeLettersFrequencyDict(const string& fileNa
 
     fstream fs(fileName, ios::in);
     if (!fs.is_open()) {
-        throw exception(("TextProcessor: �� ������� ������� ���� " + fileName).c_str());
+        throw runtime_error(string("TextProcessor: Не удалось открыть файл ") + fileName);
     }
+    // Указываем локаль CP1251 — важно для корректной обработки русских символов
     fs.imbue(locale(".1251"));
 
     string text;

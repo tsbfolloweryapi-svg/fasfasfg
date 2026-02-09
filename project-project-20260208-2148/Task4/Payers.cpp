@@ -5,24 +5,30 @@
 #include <sstream>
 #include <stdexcept>  // for runtime_error
 
+// РџСЂРѕРІРµСЂСЏРµС‚ СѓСЃРїРµС€РЅРѕСЃС‚СЊ РїСЂРµРґС‹РґСѓС‰РµР№ РѕРїРµСЂР°С†РёРё С‡С‚РµРЅРёСЏ РёР· istringstream
+// Р’С‹Р±СЂР°СЃС‹РІР°РµС‚ РёСЃРєР»СЋС‡РµРЅРёРµ, РµСЃР»Рё С‡С‚РµРЅРёРµ Р·Р°РІРµСЂС€РёР»РѕСЃСЊ СЃ РѕС€РёР±РєРѕР№
 void checkInputFormat(istringstream& iss) {
-    if (iss.fail()) throw runtime_error("CSV: неверный формат поля");
+    if (iss.fail()) throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
 }
 
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ: Р·Р°РїРѕР»РЅСЏРµС‚ СЃРїРёСЃРѕРє С‚РµСЃС‚РѕРІС‹РјРё РїР»Р°С‚РµР»СЊС‰РёРєР°РјРё
 Payers::Payers() {
     for (int i = 0; i < 15; ++i) {
         list_.push_back(Payer::createFactory(nextId_++));
     }
 }
 
+// Р”РѕР±Р°РІР»СЏРµС‚ РЅРѕРІРѕРіРѕ РїР»Р°С‚РµР»СЊС‰РёРєР° РІ СЃРїРёСЃРѕРє (СЃРіРµРЅРµСЂРёСЂРѕРІР°РЅРЅС‹Р№ С„Р°Р±СЂРёРєРѕР№)
 void Payers::addPayer() {
     list_.push_back(Payer::createFactory(nextId_++));
 }
 
+// РЈРґР°Р»СЏРµС‚ РїР»Р°С‚РµР»СЊС‰РёРєР° РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
 void Payers::deleteById(int id) {
     list_.remove_if([id](const Payer& p) { return p.getId() == id; });
 }
 
+// Р¤РёР»СЊС‚СЂР°С†РёСЏ: РІРѕР·РІСЂР°С‰Р°РµС‚ РІСЃРµС… РїР»Р°С‚РµР»СЊС‰РёРєРѕРІ СЃ СѓРєР°Р·Р°РЅРЅС‹Рј С‚Р°СЂРёС„РѕРј
 list<Payer> Payers::selectByTariff(double tariff) const {
     list<Payer> result;
     copy_if(list_.begin(), list_.end(), back_inserter(result), [tariff](const Payer& p) {
@@ -31,6 +37,7 @@ list<Payer> Payers::selectByTariff(double tariff) const {
     return result;
 }
 
+// Р¤РёР»СЊС‚СЂР°С†РёСЏ: РІРѕР·РІСЂР°С‰Р°РµС‚ РІСЃРµС… РїР»Р°С‚РµР»СЊС‰РёРєРѕРІ СЃ СѓРєР°Р·Р°РЅРЅРѕР№ СЃРєРёРґРєРѕР№
 list<Payer> Payers::selectByDiscount(int discount) const {
     list<Payer> result;
     copy_if(list_.begin(), list_.end(), back_inserter(result), [discount](const Payer& p) {
@@ -39,6 +46,8 @@ list<Payer> Payers::selectByDiscount(int discount) const {
     return result;
 }
 
+// Р¤РёР»СЊС‚СЂР°С†РёСЏ: РІРѕР·РІСЂР°С‰Р°РµС‚ РїР»Р°С‚РµР»СЊС‰РёРєРѕРІ, Сѓ РєРѕС‚РѕСЂС‹С… СЃСѓРјРјР° РІ Р·Р°РґР°РЅРЅРѕРј РґРёР°РїР°Р·РѕРЅРµ
+// Р РµР·СѓР»СЊС‚Р°С‚ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ СЃРѕСЂС‚РёСЂСѓРµС‚СЃСЏ РїРѕ РЅРѕРјРµСЂСѓ С‚РµР»РµС„РѕРЅР°
 list<Payer> Payers::selectBySumRange(double low, double high) const {
     list<Payer> result;
     copy_if(list_.begin(), list_.end(), back_inserter(result), [low, high](const Payer& p) {
@@ -49,6 +58,7 @@ list<Payer> Payers::selectBySumRange(double low, double high) const {
     return result;
 }
 
+// Р¤РёР»СЊС‚СЂР°С†РёСЏ: РІРѕР·РІСЂР°С‰Р°РµС‚ РїР»Р°С‚РµР»СЊС‰РёРєРѕРІ СЃ СѓРєР°Р·Р°РЅРЅС‹Рј С‚РµР»РµС„РѕРЅРѕРј
 list<Payer> Payers::selectByPhone(const string& phone) const {
     list<Payer> result;
     copy_if(list_.begin(), list_.end(), back_inserter(result), [&phone](const Payer& p) {
@@ -57,6 +67,7 @@ list<Payer> Payers::selectByPhone(const string& phone) const {
     return result;
 }
 
+// Р¤РёР»СЊС‚СЂР°С†РёСЏ: РІРѕР·РІСЂР°С‰Р°РµС‚ РїР»Р°С‚РµР»СЊС‰РёРєРѕРІ СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РёРјРµРЅРµРј
 list<Payer> Payers::selectByName(const string& name) const {
     list<Payer> result;
     copy_if(list_.begin(), list_.end(), back_inserter(result), [&name](const Payer& p) {
@@ -65,6 +76,7 @@ list<Payer> Payers::selectByName(const string& name) const {
     return result;
 }
 
+// Р¤РёР»СЊС‚СЂР°С†РёСЏ: РІРѕР·РІСЂР°С‰Р°РµС‚ РїР»Р°С‚РµР»СЊС‰РёРєРѕРІ СЃ СѓРєР°Р·Р°РЅРЅРѕР№ РґР°С‚РѕР№
 list<Payer> Payers::selectByDate(const Date& date) const {
     list<Payer> result;
     copy_if(list_.begin(), list_.end(), back_inserter(result), [&date](const Payer& p) {
@@ -73,32 +85,39 @@ list<Payer> Payers::selectByDate(const Date& date) const {
     return result;
 }
 
+// РџРѕРґСЃС‡РµС‚ РѕР±С‰РµР№ СЃСѓРјРјС‹ РІСЃРµС… РїР»Р°С‚РµР¶РµР№
 double Payers::totalPayments() const {
     double sum = 0.0;
     for (const auto& p : list_) sum += p.calculateSum();
     return sum;
 }
 
+// РЎРѕСЂС‚РёСЂРѕРІРєР°: РїРѕ РЅРѕРјРµСЂСѓ С‚РµР»РµС„РѕРЅР°
 void Payers::sortByPhone() {
     list_.sort([](const Payer& a, const Payer& b) { return a.getPhone() < b.getPhone(); });
 }
 
+// РЎРѕСЂС‚РёСЂРѕРІРєР°: РїРѕ РІСЂРµРјРµРЅРё РІС‹Р·РѕРІРѕРІ РїРѕ СѓР±С‹РІР°РЅРёСЋ
 void Payers::sortByTimeDescending() {
     list_.sort([](const Payer& a, const Payer& b) { return a.getTimeMin() > b.getTimeMin(); });
 }
 
+// РЎРѕСЂС‚РёСЂРѕРІРєР°: РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
 void Payers::sortById() {
     list_.sort([](const Payer& a, const Payer& b) { return a.getId() < b.getId(); });
 }
 
+// РЎРѕСЂС‚РёСЂРѕРІРєР°: РїРѕ РёРјРµРЅРё
 void Payers::sortByName() {
     list_.sort([](const Payer& a, const Payer& b) { return a.getName() < b.getName(); });
 }
 
+// РЎРѕСЂС‚РёСЂРѕРІРєР°: РїРѕ СЃСѓРјРјРµ РїР»Р°С‚РµР¶Р° РїРѕ СѓР±С‹РІР°РЅРёСЋ
 void Payers::sortBySumDescending() {
     list_.sort([](const Payer& a, const Payer& b) { return a.calculateSum() > b.calculateSum(); });
 }
 
+// Р—Р°РјРµРЅСЏРµС‚ РґР°РЅРЅС‹Рµ РїР»Р°С‚РµР»СЊС‰РёРєР° СЃ СѓРєР°Р·Р°РЅРЅС‹Рј id РЅРѕРІС‹РјРё (РіРµРЅРµСЂРёСЂСѓРµРјС‹РјРё С„Р°Р±СЂРёРєРѕР№)
 void Payers::changePayer(int id) {
     for (auto& p : list_) {
         if (p.getId() == id) {
@@ -106,35 +125,38 @@ void Payers::changePayer(int id) {
             return;
         }
     }
-    throw runtime_error("Плательщик не найден");
+    throw runtime_error("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
 }
 
+// РЎРѕС…СЂР°РЅРµРЅРёРµ СЃРїРёСЃРєР° РїР»Р°С‚РµР»СЊС‰РёРєРѕРІ РІ CSV-С„Р°Р№Р»
 void Payers::saveToCSV(const string& fname) const {
     ofstream out(fname);
-    if (!out.is_open()) throw runtime_error(("Не удалось открыть файл для записи: " + fname).c_str());
+    if (!out.is_open()) throw runtime_error(("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: " + fname).c_str());
 
-    out << "ID,ФИО,Телефон,Тариф,Скидка,Минуты,День,Месяц,Год\n";
+    out << "ID,пїЅпїЅпїЅ,пїЅпїЅпїЅпїЅпїЅпїЅпїЅ,пїЅпїЅпїЅпїЅпїЅ,пїЅпїЅпїЅпїЅпїЅпїЅ,пїЅпїЅпїЅпїЅпїЅпїЅ,пїЅпїЅпїЅпїЅ,пїЅпїЅпїЅпїЅпїЅ,пїЅпїЅпїЅ\n";
     for (const auto& p : list_) {
         out << p.getId() << "," << p.getName() << "," << p.getPhone() << "," << p.getTariff() << "," << p.getDiscount()
             << "," << p.getTimeMin() << "," << p.getDate().getDay() << "," << p.getDate().getMonth() << "," << p.getDate().getYear() << "\n";
     }
 }
 
+// Р—Р°РіСЂСѓР·РєР° СЃРїРёСЃРєР° РїР»Р°С‚РµР»СЊС‰РёРєРѕРІ РёР· CSV-С„Р°Р№Р»Р°
+// РџСЂРёРјРµС‡Р°РЅРёРµ: РїР°СЂСЃРёРЅРі СЃС‚СЂРѕРіРёР№ вЂ” РѕР¶РёРґР°РµС‚СЃСЏ С‚РѕС‡РЅС‹Р№ С„РѕСЂРјР°С‚, РёРЅР°С‡Рµ РІС‹Р±СЂР°СЃС‹РІР°РµС‚СЃСЏ РёСЃРєР»СЋС‡РµРЅРёРµ
 void Payers::loadFromCSV(const string& fname) {
-    if (fname.empty()) throw runtime_error("CSV: пустое имя файла.");
+    if (fname.empty()) throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.");
 
     ifstream in(fname);
-    if (!in.is_open()) throw runtime_error(("CSV: не удалось открыть файл " + fname).c_str());
+    if (!in.is_open()) throw runtime_error(("CSV: пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ " + fname).c_str());
 
     string line;
-    if (!getline(in, line)) throw runtime_error("CSV: ошибка чтения заголовка.");
+    if (!getline(in, line)) throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
 
+    // РџСЂРѕРІРµСЂСЏРµРј Р·Р°РіРѕР»РѕРІРѕРє CSV
     {
         istringstream iss(line);
         string token;
-        if (!getline(iss, token, ',')) throw runtime_error("CSV: неверный заголовок.");
-        if (token != "ID") throw runtime_error("CSV: неверный заголовок (ожидается ID).");
-        // Заголовок корректен: далее ожидается набор полей в фиксированном порядке
+        if (!getline(iss, token, ',')) throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
+        if (token != "ID") throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ID).");
     }
 
     list_.clear();
@@ -146,29 +168,31 @@ void Payers::loadFromCSV(const string& fname) {
         double tariff;
         string name, phone;
 
+        // Р§РёС‚Р°РµРј РїРѕР»СЏ РІ СЃС‚СЂРѕРіРѕРј РїРѕСЂСЏРґРєРµ Рё РїСЂРѕРІРµСЂСЏРµРј С„РѕСЂРјР°С‚ РїРѕСЃР»Рµ РєР°Р¶РґРѕРіРѕ С‡С‚РµРЅРёСЏ
         iss >> id;
         checkInputFormat(iss);
-        if (iss.get() != ',') throw runtime_error("CSV: неверный разделитель (ожидается запятая после ID).");
+        if (iss.get() != ',') throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ ID).");
         getline(iss, name, ',');
         getline(iss, phone, ',');
         iss >> tariff;
         checkInputFormat(iss);
-        if (iss.get() != ',') throw runtime_error("CSV: неверный разделитель (ожидается запятая после тарифа).");
+        if (iss.get() != ',') throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ).");
         iss >> discount;
         checkInputFormat(iss);
-        if (iss.get() != ',') throw runtime_error("CSV: неверный разделитель (ожидается запятая после скидки).");
+        if (iss.get() != ',') throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ).");
         iss >> timeMin;
         checkInputFormat(iss);
-        if (iss.get() != ',') throw runtime_error("CSV: неверный разделитель (ожидается запятая после минут).");
+        if (iss.get() != ',') throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ).");
         iss >> d;
         checkInputFormat(iss);
-        if (iss.get() != ',') throw runtime_error("CSV: неверный разделитель (ожидается запятая после дня).");
+        if (iss.get() != ',') throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ).");
         iss >> m;
         checkInputFormat(iss);
-        if (iss.get() != ',') throw runtime_error("CSV: неверный разделитель (ожидается запятая после месяца).");
+        if (iss.get() != ',') throw runtime_error("CSV: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ).");
         iss >> y;
         checkInputFormat(iss);
 
+        // Р—Р°РїРѕР»РЅСЏРµРј РѕР±СЉРµРєС‚ Payer СЃС‡РёС‚Р°РЅРЅС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё
         p.setId(id);
         p.setName(name);
         p.setPhone(phone);
@@ -181,5 +205,5 @@ void Payers::loadFromCSV(const string& fname) {
         nextId_ = max(nextId_, p.getId() + 1);
     }
 
-    if (list_.empty()) throw runtime_error("CSV: в файле нет записей для загрузки.");
+    if (list_.empty()) throw runtime_error("CSV: пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
 }

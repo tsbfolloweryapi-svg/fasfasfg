@@ -1,7 +1,7 @@
 #include "App.h"
 #include "Utils.h"
 
-// хелпер для вывода
+// Р’С‹РІРѕРґ РјР°СЃСЃРёРІР° РІ РІРёРґРµ С‚Р°Р±Р»РёС†С‹ РґР»СЏ РѕС‚Р»Р°РґРєРё
 static void printVectorVisual(const vector<float>& v, const string& title = "", int perRow = 8) {
     if (!title.empty()) cout << title << " (size=" << v.size() << "):\n";
     const int w = 10;
@@ -11,16 +11,16 @@ static void printVectorVisual(const vector<float>& v, const string& title = "", 
     }
 }
 
-// App: реализация функций для задания 1
+// App: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1
 
+// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ: СЃРѕР·РґР°РµРј СЃР»СѓС‡Р°Р№РЅС‹Р№ РІРµРєС‚РѕСЂ РґР»РёРЅРѕР№ [12,30]
 App::App() : binFile_("task1_vector.bin") {
-    // создаём вектор размера [12,30] с псевдослучайными значениями
     int n = getRand(12, 30);
     v_.assign(n, 0.0f);
     for (auto &x : v_) x = getRand(-100.0f, 100.0f);
 }
 
-// Чтение одного числа с проверкой формата ввода (согласно правилам)
+// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 float App::readFloatFromCin(const string &prompt) {
     // kept for compatibility but not used in automated run
     cout << prompt;
@@ -31,27 +31,27 @@ float App::readFloatFromCin(const string &prompt) {
 
 void App::saveToBinary() const {
     ofstream out(binFile_, ios::binary | ios::out | ios::trunc);
-    if (!out.is_open()) throw std::runtime_error("Не удалось открыть файл для записи");
+    if (!out.is_open()) throw std::runtime_error("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
 
     size_t n = v_.size();
     out.write(reinterpret_cast<const char*>(&n), sizeof(n));
     if (n) out.write(reinterpret_cast<const char*>(v_.data()), n * sizeof(float));
-    if (out.fail()) throw std::runtime_error("Ошибка записи в бинарный файл");
+    if (out.fail()) throw std::runtime_error("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
 }
 
 void App::loadFromBinary() {
     ifstream in(binFile_, ios::binary | ios::in);
-    if (!in.is_open()) throw std::runtime_error("Не удалось открыть файл для чтения");
+    if (!in.is_open()) throw std::runtime_error("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
 
     size_t n = 0;
     in.read(reinterpret_cast<char*>(&n), sizeof(n));
-    if (in.fail()) throw std::runtime_error("Ошибка чтения размера из бинарного файла");
+    if (in.fail()) throw std::runtime_error("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 
     vector<float> tmp;
     if (n) {
         tmp.resize(n);
         in.read(reinterpret_cast<char*>(tmp.data()), n * sizeof(float));
-        if (in.fail()) throw std::runtime_error("Ошибка чтения данных из бинарного файла");
+        if (in.fail()) throw std::runtime_error("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
     }
 
     v_.swap(tmp);
@@ -59,16 +59,16 @@ void App::loadFromBinary() {
 
 void App::run() {
     init();
-    // Сохраняем исходный вектор в бинарный файл перед обработками
+    // РЎРѕС…СЂР°РЅСЏРµРј РёСЃС…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ РІ Р±РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р»
     saveToBinary();
 
-    // Автоматически генерируем интервал [a,b]
+    // Р“РµРЅРµСЂРёСЂСѓРµРј СЃР»СѓС‡Р°Р№РЅС‹Р№ РёРЅС‚РµСЂРІР°Р» [a,b]
     float a = getRand(-50.0f, 50.0f);
     float b = a + getRand(0.0f, 100.0f);
     if (a > b) swap(a, b);
-    cout << "Автогенерированный интервал: a=" << a << " b=" << b << "\n";
+    cout << "РЎРіРµРЅРµСЂРёСЂРѕРІР°РЅ РёРЅС‚РµСЂРІР°Р»: a=" << a << " b=" << b << "\n";
 
-    // Выполнение шагов по очереди
+    // Р’С‹РїРѕР»РЅСЏРµРј С€Р°РіРё РѕР±СЂР°Р±РѕС‚РєРё РґР°РЅРЅС‹С… РїРѕ РїРѕСЂСЏРґРєСѓ
     step_countNegative();
     step_countOutsideInterval(a, b);
     step_sumBeforeFirstMin();
@@ -76,32 +76,33 @@ void App::run() {
     step_selectNegatives();
     step_selectOutsideInterval(a, b);
     step_sortDescending();
-    // Восстанавливаем исходный вектор из файла перед следующими операциями
+
+    // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РёСЃС…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ Рё РІС‹РїРѕР»РЅСЏРµРј РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РѕРїРµСЂР°С†РёРё
     loadFromBinary();
     step_sortByAbsAscending();
     loadFromBinary();
     step_moveOutsideIntervalToEnd(a, b);
 
-    // Восстанавливаем вектор из бинарного файла после всех обработок
+    // Р¤РёРЅР°Р»СЊРЅС‹Р№ РІС‹РІРѕРґ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІРµРєС‚РѕСЂР°
     loadFromBinary();
-    cout << "Вектор восстановлен из бинарного файла, размер=" << v_.size() << "\n";
+    cout << "Р”Р»РёРЅР° РІРµРєС‚РѕСЂР° РїРѕСЃР»Рµ РѕРїРµСЂР°С†РёР№, size=" << v_.size() << "\n";
 }
 
-// основные методы
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 void App::step_countNegative() {
     const auto negCount = count_if(v_.begin(), v_.end(), [](float x){ return x < 0.0f; });
-    cout << "1) Количество отрицательных элементов: " << negCount << "\n";
+    cout << "1) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << negCount << "\n";
 }
 
 void App::step_countOutsideInterval(float a, float b) {
     const auto notInInterval = count_if(v_.begin(), v_.end(), [a,b](float x){ return x < a || x > b; });
-    cout << "2) Количество элементов вне [a,b]: " << notInInterval << "\n";
+    cout << "2) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ [a,b]: " << notInInterval << "\n";
 }
 
 void App::step_sumBeforeFirstMin() {
     const auto itMin = min_element(v_.begin(), v_.end());
     const float sumBeforeMin = (itMin == v_.begin() || itMin == v_.end()) ? 0.0f : accumulate(v_.begin(), itMin, 0.0f);
-    cout << "3) Сумма перед первым минимальным элементом: " << sumBeforeMin << "\n";
+    cout << "3) пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << sumBeforeMin << "\n";
 }
 
 void App::step_sumBetweenFirstMinAndFirstMax() {
@@ -113,37 +114,37 @@ void App::step_sumBetweenFirstMinAndFirstMax() {
         auto last = max(itMin, itMax);
         if (distance(first, last) > 1) sumBetween = accumulate(next(first), last, 0.0f);
     }
-    cout << "4) Сумма между первым min и первым max: " << sumBetween << "\n";
+    cout << "4) пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ min пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ max: " << sumBetween << "\n";
 }
 
 void App::step_selectNegatives() {
     vector<float> negatives;
     copy_if(v_.begin(), v_.end(), back_inserter(negatives), [](float x){ return x < 0.0f; });
-    cout << "5) Отобранные отрицательные элементы (count=" << negatives.size() << ":\n";
+    cout << "5) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (count=" << negatives.size() << ":\n";
     if (!negatives.empty()) printVectorVisual(negatives, string());
 }
 
 void App::step_selectOutsideInterval(float a, float b) {
     vector<float> outside;
     copy_if(v_.begin(), v_.end(), back_inserter(outside), [a,b](float x){ return x < a || x > b; });
-    cout << "6) Элементы вне [a,b] (count=" << outside.size() << ":\n";
+    cout << "6) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ [a,b] (count=" << outside.size() << ":\n";
     if (!outside.empty()) printVectorVisual(outside, string());
 }
 
 void App::step_sortDescending() {
     sort(v_.begin(), v_.end(), greater<float>());
-    cout << "7) Вектор после сортировки по убыванию:\n";
+    cout << "7) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:\n";
     printVectorVisual(v_, string());
 }
 
 void App::step_sortByAbsAscending() {
     sort(v_.begin(), v_.end(), [](float lhs, float rhs){ return fabs(lhs) < fabs(rhs); });
-    cout << "8) Вектор после сортировки по возрастанию модулей:\n";
+    cout << "8) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ:\n";
     printVectorVisual(v_, string());
 }
 
 void App::step_moveOutsideIntervalToEnd(float a, float b) {
     stable_partition(v_.begin(), v_.end(), [a,b](float x){ return x >= a && x <= b; });
-    cout << "9) Перенос элементов вне [a,b] в конец (внутри-интервал в начале):\n";
+    cout << "9) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ [a,b] пїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ):\n";
     printVectorVisual(v_, string());
 }

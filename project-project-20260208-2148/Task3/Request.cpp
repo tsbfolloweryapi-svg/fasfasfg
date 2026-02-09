@@ -4,9 +4,9 @@
 Request Request::createFactory(int id) {
     Request r;
     r.id = id;
-    string dest = "Пункт назначения " + to_string(getRand(1, 15));
+    string dest = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + to_string(getRand(1, 15));
     string flight = "PO-" + to_string(getRand(1000, 9999)) + "K";
-    string pass = "Иванов " + to_string(getRand(1, 30)) + " П.О.";
+    string pass = "пїЅпїЅпїЅпїЅпїЅпїЅ " + to_string(getRand(1, 30)) + " пїЅ.пїЅ.";
     Date d;
     d.setDate(getRand(1, 28), getRand(1, 12), getRand(2025, 2027));
 
@@ -19,8 +19,8 @@ Request Request::createFactory(int id) {
 
 string Request::toString() const {
     ostringstream oss;
-    oss << "ID: " << id << ", Пункт назначения: " << destination << ", Рейс: " << flightNum
-        << ", Пассажир: " << passenger << ", Дата: " << date.toString();
+    oss << "ID: " << id << ", пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << destination << ", пїЅпїЅпїЅпїЅ: " << flightNum
+        << ", пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << passenger << ", пїЅпїЅпїЅпїЅ: " << date.toString();
     return oss.str();
 }
 
