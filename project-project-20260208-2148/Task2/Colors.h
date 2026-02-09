@@ -1,6 +1,6 @@
 #pragma once
 
-// объявление константы - кода цвета в консоли
+// ?????????? ????????? - ???? ????? ? ???????
 const short BLACK   = 0b0000;
 const short BLUE    = 0b0001;
 const short GREEN   = 0b0010;
@@ -19,7 +19,7 @@ const short LTMAGENTA = 0b1101;
 const short LTYELLOW  = 0b1110;
 const short WHITE     = 0b1111;
 
-// Цвета на черном фоне
+// ????? ?? ?????? ????
 const short BLACK_ON_BLACK     = BLACK   | BLACK << 4;
 const short BLUE_ON_BLACK      = BLUE    | BLACK << 4;
 const short GREEN_ON_BLACK     = GREEN   | BLACK << 4;
@@ -38,7 +38,7 @@ const short LTMAGENTA_ON_BLACK = LTMAGENTA | BLACK << 4;
 const short LTYELLOW_ON_BLACK  = LTYELLOW  | BLACK << 4;
 const short WHITE_ON_BLACK     = WHITE     | BLACK << 4;
 
-// Цвета на cинем фоне
+// ????? ?? c???? ????
 const short BLACK_ON_BLUE     = BLACK   | BLUE << 4;
 const short BLUE_ON_BLUE      = BLUE    | BLUE << 4;
 const short GREEN_ON_BLUE     = GREEN   | BLUE << 4;
@@ -57,7 +57,7 @@ const short LTMAGENTA_ON_BLUE = LTMAGENTA | BLUE << 4;
 const short LTYELLOW_ON_BLUE  = LTYELLOW  | BLUE << 4;
 const short WHITE_ON_BLUE     = WHITE     | BLUE << 4;
 
-// Цвета на зеленом фоне
+// ????? ?? ??????? ????
 const short BLACK_ON_GREEN     = BLACK   | GREEN << 4;
 const short BLUE_ON_GREEN      = BLUE    | GREEN << 4;
 const short GREEN_ON_GREEN     = GREEN   | GREEN << 4;
@@ -76,7 +76,7 @@ const short LTMAGENTA_ON_GREEN = LTMAGENTA | GREEN << 4;
 const short LTYELLOW_ON_GREEN  = LTYELLOW  | GREEN << 4;
 const short WHITE_ON_GREEN     = WHITE     | GREEN << 4;
 
-// Цвета на голубом фоне
+// ????? ?? ??????? ????
 const short BLACK_ON_CYAN     = BLACK   | CYAN << 4;
 const short BLUE_ON_CYAN      = BLUE    | CYAN << 4;
 const short GREEN_ON_CYAN     = GREEN   | CYAN << 4;
@@ -95,7 +95,7 @@ const short LTMAGENTA_ON_CYAN = LTMAGENTA | CYAN << 4;
 const short LTYELLOW_ON_CYAN  = LTYELLOW  | CYAN << 4;
 const short WHITE_ON_CYAN     = WHITE     | CYAN << 4;
 
-// Цвета на красном фоне
+// ????? ?? ??????? ????
 const short BLACK_ON_RED     = BLACK   | RED << 4;
 const short BLUE_ON_RED      = BLUE    | RED << 4;
 const short GREEN_ON_RED     = GREEN   | RED << 4;
@@ -114,7 +114,7 @@ const short LTMAGENTA_ON_RED = LTMAGENTA | RED << 4;
 const short LTYELLOW_ON_RED  = LTYELLOW  | RED << 4;
 const short WHITE_ON_RED     = WHITE     | RED << 4;
 
-// Цвета на лиловом фоне
+// ????? ?? ??????? ????
 const short BLACK_ON_MAGENTA     = BLACK   | MAGENTA << 4;
 const short BLUE_ON_MAGENTA      = BLUE    | MAGENTA << 4;
 const short GREEN_ON_MAGENTA     = GREEN   | MAGENTA << 4;
@@ -133,7 +133,7 @@ const short LTMAGENTA_ON_MAGENTA = LTMAGENTA | MAGENTA << 4;
 const short LTYELLOW_ON_MAGENTA  = LTYELLOW  | MAGENTA << 4;
 const short WHITE_ON_MAGENTA     = WHITE     | MAGENTA << 4;
 
-// Цвета на желтом фоне
+// ????? ?? ?????? ????
 const short BLACK_ON_YELLOW     = BLACK   | YELLOW << 4;
 const short BLUE_ON_YELLOW      = BLUE    | YELLOW << 4;
 const short GREEN_ON_YELLOW     = GREEN   | YELLOW << 4;
@@ -152,7 +152,7 @@ const short LTMAGENTA_ON_YELLOW = LTMAGENTA | YELLOW << 4;
 const short LTYELLOW_ON_YELLOW  = LTYELLOW  | YELLOW << 4;
 const short WHITE_ON_YELLOW     = WHITE     | YELLOW << 4;
 
-// Цвета на сером фоне
+// ????? ?? ????? ????
 const short BLACK_ON_GRAY     = BLACK   | GRAY << 4;
 const short BLUE_ON_GRAY      = BLUE    | GRAY << 4;
 const short GREEN_ON_GRAY     = GREEN   | GRAY << 4;
@@ -171,7 +171,7 @@ const short LTMAGENTA_ON_GRAY = LTMAGENTA | GRAY << 4;
 const short LTYELLOW_ON_GRAY  = LTYELLOW  | GRAY << 4;
 const short WHITE_ON_GRAY     = WHITE     | GRAY << 4;
 
-// Цвета на светло-черном фоне
+// ????? ?? ??????-?????? ????
 const short BLACK_ON_LTBLACK     = BLACK   | LTBLACK << 4;
 const short BLUE_ON_LTBLACK      = BLUE    | LTBLACK << 4;
 const short GREEN_ON_LTBLACK     = GREEN   | LTBLACK << 4;
@@ -190,7 +190,7 @@ const short LTMAGENTA_ON_LTBLACK = LTMAGENTA | LTBLACK << 4;
 const short LTYELLOW_ON_LTBLACK  = LTYELLOW  | LTBLACK << 4;
 const short WHITE_ON_LTBLACK     = WHITE     | LTBLACK << 4;
 
-// Цвета на светло-cинем фоне
+// ????? ?? ??????-c???? ????
 const short BLACK_ON_LTBLUE     = BLACK   | LTBLUE << 4;
 const short BLUE_ON_LTBLUE      = BLUE    | LTBLUE << 4;
 const short GREEN_ON_LTBLUE     = GREEN   | LTBLUE << 4;
@@ -209,7 +209,7 @@ const short LTMAGENTA_ON_LTBLUE = LTMAGENTA | LTBLUE << 4;
 const short LTYELLOW_ON_LTBLUE  = LTYELLOW  | LTBLUE << 4;
 const short WHITE_ON_LTBLUE     = WHITE     | LTBLUE << 4;
 
-// Цвета на светло-зеленом фоне
+// ????? ?? ??????-??????? ????
 const short BLACK_ON_LTGREEN     = BLACK   | LTGREEN << 4;
 const short BLUE_ON_LTGREEN      = BLUE    | LTGREEN << 4;
 const short GREEN_ON_LTGREEN     = GREEN   | LTGREEN << 4;
@@ -228,7 +228,7 @@ const short LTMAGENTA_ON_LTGREEN = LTMAGENTA | LTGREEN << 4;
 const short LTYELLOW_ON_LTGREEN  = LTYELLOW  | LTGREEN << 4;
 const short WHITE_ON_LTGREEN     = WHITE     | LTGREEN << 4;
 
-// Цвета на светло-голубом фоне
+// ????? ?? ??????-??????? ????
 const short BLACK_ON_LTCYAN     = BLACK   | LTCYAN << 4;
 const short BLUE_ON_LTCYAN      = BLUE    | LTCYAN << 4;
 const short GREEN_ON_LTCYAN     = GREEN   | LTCYAN << 4;
@@ -247,7 +247,7 @@ const short LTMAGENTA_ON_LTCYAN = LTMAGENTA | LTCYAN << 4;
 const short LTYELLOW_ON_LTCYAN  = LTYELLOW  | LTCYAN << 4;
 const short WHITE_ON_LTCYAN     = WHITE     | LTCYAN << 4;
 
-// Цвета на светло-красном фоне
+// ????? ?? ??????-??????? ????
 const short BLACK_ON_LTRED     = BLACK   | LTRED << 4;
 const short BLUE_ON_LTRED      = BLUE    | LTRED << 4;
 const short GREEN_ON_LTRED     = GREEN   | LTRED << 4;
@@ -266,7 +266,7 @@ const short LTMAGENTA_ON_LTRED = LTMAGENTA | LTRED << 4;
 const short LTYELLOW_ON_LTRED  = LTYELLOW  | LTRED << 4;
 const short WHITE_ON_LTRED     = WHITE     | LTRED << 4;
 
-// Цвета на светло-лиловом фоне
+// ????? ?? ??????-??????? ????
 const short BLACK_ON_LTMAGENTA     = BLACK   | LTMAGENTA << 4;
 const short BLUE_ON_LTMAGENTA      = BLUE    | LTMAGENTA << 4;
 const short GREEN_ON_LTMAGENTA     = GREEN   | LTMAGENTA << 4;
@@ -285,7 +285,7 @@ const short LTMAGENTA_ON_LTMAGENTA = LTMAGENTA | LTMAGENTA << 4;
 const short LTYELLOW_ON_LTMAGENTA  = LTYELLOW  | LTMAGENTA << 4;
 const short WHITE_ON_LTMAGENTA     = WHITE     | LTMAGENTA << 4;
 
-// Цвета на светло-желтом фоне
+// ????? ?? ??????-?????? ????
 const short BLACK_ON_LTYELLOW     = BLACK   | LTYELLOW << 4;
 const short BLUE_ON_LTYELLOW      = BLUE    | LTYELLOW << 4;
 const short GREEN_ON_LTYELLOW     = GREEN   | LTYELLOW << 4;
@@ -304,7 +304,7 @@ const short LTMAGENTA_ON_LTYELLOW = LTMAGENTA | LTYELLOW << 4;
 const short LTYELLOW_ON_LTYELLOW  = LTYELLOW  | LTYELLOW << 4;
 const short WHITE_ON_LTYELLOW     = WHITE     | LTYELLOW << 4;
 
-// Цвета на белом (светло-сером) фоне
+// ????? ?? ????? (??????-?????) ????
 const short BLACK_ON_WHITE     = BLACK   | WHITE << 4;
 const short BLUE_ON_WHITE      = BLUE    | WHITE << 4;
 const short GREEN_ON_WHITE     = GREEN   | WHITE << 4;

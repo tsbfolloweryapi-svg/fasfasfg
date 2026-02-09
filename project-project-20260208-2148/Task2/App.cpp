@@ -7,15 +7,15 @@
 App::App() : App("test.txt") {}
 App::App(const string& fileName) : fileName_(fileName) {}
 
-// Р’С‹РІРѕРґ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ С‚РµРєСЃС‚РѕРІРѕРіРѕ С„Р°Р№Р»Р° РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃ РЅСѓРјРµСЂР°С†РёРµР№
+// Вывод содержимого текстового файла построчно с нумерацией
 void App::viewText(const string& title, const string& fname) {
     cout << "     " << title << "\n"
-        << "     +" << setfill('-') << setw(112) << "-" << "+"  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 8
+        << "     +" << setfill('-') << setw(112) << "-" << "+"  // ????????? ?? 8
         << setfill(' ') << "\n";
 
     fstream fs(fname, ios::in);
     if (!fs.is_open()) {
-        throw exception(("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ " + fname + " пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ").c_str());
+        throw exception(("?????? ???????? ????? " + fname + " ??? ??????").c_str());
     }
     fs.imbue(locale(".1251"));
 
@@ -23,14 +23,14 @@ void App::viewText(const string& title, const string& fname) {
     string line;
     while (getline(fs, line)) {
         cout << " " << setfill('0') << setw(3) << row++ << setfill(' ')
-            << " | " << left << setw(110) << line << right << " |\n";  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 8
+            << " | " << left << setw(110) << line << right << " |\n";  // ????????? ?? 8
     }
     fs.close();
     cout << "     +" << setfill('-') << setw(112) << "-" << "+"
         << setfill(' ') << "\n";
 }
 
-// Р’С‹РІРѕРґ СЃР»РѕРІР°СЂСЏ С‡Р°СЃС‚РѕС‚ РІ РІРёРґРµ РєРѕР»РѕРЅРѕРє
+// Вывод словаря частот в виде колонок
 void App::show(const string& title, const map<string, double>& freqDict) {
     cout << "    " << title << "\n" << setprecision(3);
 
@@ -45,49 +45,49 @@ void App::show(const string& title, const map<string, double>& freqDict) {
     cout << "\n";
 }
 
-// РЎР±РѕСЂ Рё РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ С‡Р°СЃС‚РѕС‚С‹ РІСЃС‚СЂРµС‡Р°РµРјРѕСЃС‚Рё СЃР»РѕРІ РІ С„Р°Р№Р»Рµ
+// Сбор и отображение частоты встречаемости слов в файле
 void App::doFreqDictWords() {
     cls();
-    viewText("пїЅпїЅпїЅпїЅ " + fileName_ + ", пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:", fileName_);
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+    viewText("???? " + fileName_ + ", ????? ??? ?????????:", fileName_);
+    getKey("\n??????? ??? ???????????? ???????");
 
     try {
         map<string, double> freqDict = TextProcessor::makeWordsFrequencyDict(fileName_);
-        show("\n\n    пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ " + fileName_ + ":", freqDict);
+        show("\n\n    ????????? ??????? ???? ??????, ???? " + fileName_ + ":", freqDict);
     }
     catch (const exception& ex) {
-        cout << color(errColor) << "пїЅпїЅпїЅпїЅпїЅпїЅ: " << ex.what() << color(mainColor) << "\n";
+        cout << color(errColor) << "??????: " << ex.what() << color(mainColor) << "\n";
     }
 
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...");
+    getKey("\n??????? ??? ???????????...");
 }
 
-// РЎР±РѕСЂ Рё РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ С‡Р°СЃС‚РѕС‚С‹ РІСЃС‚СЂРµС‡Р°РµРјРѕСЃС‚Рё Р±СѓРєРІ РІ С„Р°Р№Р»Рµ
+// Сбор и отображение частоты встречаемости букв в файле
 void App::doFreqDictLetters() {
     cls();
-    viewText("пїЅпїЅпїЅпїЅ " + fileName_ + ", пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:", fileName_);
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+    viewText("???? " + fileName_ + ", ????? ??? ?????????:", fileName_);
+    getKey("\n??????? ??? ???????????? ???????");
 
     try {
         map<string, double> freqDict = TextProcessor::makeLettersFrequencyDict(fileName_);
-        show("\n\n    пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ " + fileName_ + ":", freqDict);
+        show("\n\n    ????????? ??????? ???? ??????, ???? " + fileName_ + ":", freqDict);
     }
     catch (const exception& ex) {
-        cout << color(errColor) << "пїЅпїЅпїЅпїЅпїЅпїЅ: " << ex.what() << color(mainColor) << "\n";
+        cout << color(errColor) << "??????: " << ex.what() << color(mainColor) << "\n";
     }
 
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...");
+    getKey("\n??????? ??? ???????????...");
 }
 
-// Р§С‚РµРЅРёРµ С„Р°Р№Р»Р°, РѕР±РјРµРЅ РїР°СЂ СЃС‚СЂРѕРє Рё Р·Р°РїРёСЃСЊ СЂРµР·СѓР»СЊС‚Р°С‚Р° РІ РЅРѕРІС‹Р№ С„Р°Р№Р»
+// Чтение файла, обмен пар строк и запись результата в новый файл
 void App::doSwapLines() {
     cls();
-    viewText("пїЅпїЅпїЅпїЅ " + fileName_ + ", пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:", fileName_);
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
+    viewText("???? " + fileName_ + ", ????? ??? ?????????:", fileName_);
+    getKey("\n??????? ??? ????? ?????");
 
     try {
         fstream in(fileName_, ios::in);
-        if (!in.is_open()) throw runtime_error(("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + fileName_).c_str());
+        if (!in.is_open()) throw runtime_error(("?????? ???????? " + fileName_).c_str());
         in.imbue(locale(".1251"));
 
         vector<string> lines;
@@ -103,33 +103,33 @@ void App::doSwapLines() {
 
         string outFile = "swap.txt";
         ofstream out(outFile);
-        if (!out.is_open()) throw runtime_error(("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " + outFile).c_str());
+        if (!out.is_open()) throw runtime_error(("?????? ?????? ? " + outFile).c_str());
         out.imbue(locale(".1251"));
         for (const auto& l : lines) {
             out << l << "\n";
         }
         out.close();
 
-        cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " << outFile << "\n";
+        cout << "?????? ????????, ????????? ? " << outFile << "\n";
         cls();
-        viewText("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " + outFile + ":", outFile);
+        viewText("????????? ? " + outFile + ":", outFile);
     }
     catch (const exception& ex) {
-        cout << color(errColor) << "пїЅпїЅпїЅпїЅпїЅпїЅ: " << ex.what() << color(mainColor) << "\n";
+        cout << color(errColor) << "??????: " << ex.what() << color(mainColor) << "\n";
     }
 
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...");
+    getKey("\n??????? ??? ???????????...");
 }
 
-// РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РїРµСЂРІРѕР№ Р±СѓРєРІС‹ РєР°Р¶РґРѕРіРѕ СЃР»РѕРІР° РІ РІРµСЂС…РЅРёР№ СЂРµРіРёСЃС‚СЂ
+// Преобразование первой буквы каждого слова в верхний регистр
 void App::doWordsCapitalize() {
     cls();
-    viewText("пїЅпїЅпїЅпїЅ " + fileName_ + ", пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:", fileName_);
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ capitalize");
+    viewText("???? " + fileName_ + ", ????? ??? ?????????:", fileName_);
+    getKey("\n??????? ??? capitalize");
 
     try {
         fstream in(fileName_, ios::in);
-        if (!in.is_open()) throw runtime_error(("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + fileName_).c_str());
+        if (!in.is_open()) throw runtime_error(("?????? ???????? " + fileName_).c_str());
         in.imbue(locale(".1251"));
 
         vector<string> lines;
@@ -156,33 +156,33 @@ void App::doWordsCapitalize() {
 
         string outFile = "capitalize.txt";
         ofstream out(outFile);
-        if (!out.is_open()) throw runtime_error(("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " + outFile).c_str());
+        if (!out.is_open()) throw runtime_error(("?????? ?????? ? " + outFile).c_str());
         out.imbue(locale(".1251"));
         for (const auto& l : newLines) {
             out << l << "\n";
         }
         out.close();
 
-        cout << "пїЅпїЅпїЅпїЅпїЅ пїЅ capitalize пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " << outFile << "\n";
+        cout << "????? ? capitalize ???????, ????????? ? " << outFile << "\n";
         cls();
-        viewText("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " + outFile + ":", outFile);
+        viewText("????????? ? " + outFile + ":", outFile);
     }
     catch (const exception& ex) {
-        cout << color(errColor) << "пїЅпїЅпїЅпїЅпїЅпїЅ: " << ex.what() << color(mainColor) << "\n";
+        cout << color(errColor) << "??????: " << ex.what() << color(mainColor) << "\n";
     }
 
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...");
+    getKey("\n??????? ??? ???????????...");
 }
 
-// РЎРѕСЂС‚РёСЂРѕРІРєР° СЃС‚СЂРѕРє РїРѕ РґР»РёРЅРµ Рё Р·Р°РїРёСЃСЊ СЂРµР·СѓР»СЊС‚Р°С‚Р° РІ С„Р°Р№Р»
+// Сортировка строк по длине и запись результата в файл
 void App::doOrderByLen() {
     cls();
-    viewText("пїЅпїЅпїЅпїЅ " + fileName_ + ", пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:", fileName_);
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
+    viewText("???? " + fileName_ + ", ????? ??? ?????????:", fileName_);
+    getKey("\n??????? ??? ?????????????? ?? ?????");
 
     try {
         fstream in(fileName_, ios::in);
-        if (!in.is_open()) throw runtime_error(("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + fileName_).c_str());
+        if (!in.is_open()) throw runtime_error(("?????? ???????? " + fileName_).c_str());
         in.imbue(locale(".1251"));
 
         vector<string> lines;
@@ -196,33 +196,33 @@ void App::doOrderByLen() {
 
         string outFile = "orderByLen.txt";
         ofstream out(outFile);
-        if (!out.is_open()) throw runtime_error(("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " + outFile).c_str());
+        if (!out.is_open()) throw runtime_error(("?????? ?????? ? " + outFile).c_str());
         out.imbue(locale(".1251"));
         for (const auto& l : lines) {
             out << l << "\n";
         }
         out.close();
 
-        cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " << outFile << "\n";
+        cout << "?????? ??????????? ?? ?????, ????????? ? " << outFile << "\n";
         cls();
-        viewText("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " + outFile + ":", outFile);
+        viewText("????????? ? " + outFile + ":", outFile);
     }
     catch (const exception& ex) {
-        cout << color(errColor) << "пїЅпїЅпїЅпїЅпїЅпїЅ: " << ex.what() << color(mainColor) << "\n";
+        cout << color(errColor) << "??????: " << ex.what() << color(mainColor) << "\n";
     }
 
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...");
+    getKey("\n??????? ??? ???????????...");
 }
 
-// РЎРѕСЂС‚РёСЂРѕРІРєР° СЃР»РѕРІ РІРЅСѓС‚СЂРё РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРё (Р»РµРєСЃРёРєРѕРіСЂР°С„РёС‡РµСЃРєРё, Р±РµР· СѓС‡С‘С‚Р° СЂРµРіРёСЃС‚СЂР°)
+// Сортировка слов внутри каждой строки (лексикографически, без учёта регистра)
 void App::doOrderWordsInLines() {
     cls();
-    viewText("пїЅпїЅпїЅпїЅ " + fileName_ + ", пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:", fileName_);
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+    viewText("???? " + fileName_ + ", ????? ??? ?????????:", fileName_);
+    getKey("\n??????? ??? ?????????????? ???? ? ???????");
 
     try {
         fstream in(fileName_, ios::in);
-        if (!in.is_open()) throw runtime_error(("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + fileName_).c_str());
+        if (!in.is_open()) throw runtime_error(("?????? ???????? " + fileName_).c_str());
         in.imbue(locale(".1251"));
 
         vector<string> lines;
@@ -251,20 +251,20 @@ void App::doOrderWordsInLines() {
 
         string outFile = "orderliness.txt";
         ofstream out(outFile);
-        if (!out.is_open()) throw runtime_error(("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " + outFile).c_str());
+        if (!out.is_open()) throw runtime_error(("?????? ?????? ? " + outFile).c_str());
         out.imbue(locale(".1251"));
         for (const auto& l : newLines) {
             out << l << "\n";
         }
         out.close();
 
-        cout << "пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " << outFile << "\n";
+        cout << "????? ? ??????? ??????????? ?? ????????, ????????? ? " << outFile << "\n";
         cls();
-        viewText("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " + outFile + ":", outFile);
+        viewText("????????? ? " + outFile + ":", outFile);
     }
     catch (const exception& ex) {
-        cout << color(errColor) << "пїЅпїЅпїЅпїЅпїЅпїЅ: " << ex.what() << color(mainColor) << "\n";
+        cout << color(errColor) << "??????: " << ex.what() << color(mainColor) << "\n";
     }
 
-    getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...");
+    getKey("\n??????? ??? ???????????...");
 }

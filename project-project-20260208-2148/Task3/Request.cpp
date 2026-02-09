@@ -4,9 +4,9 @@
 Request Request::createFactory(int id) {
     Request r;
     r.id = id;
-    string dest = "����� ���������� " + to_string(getRand(1, 15));
+    string dest = "????? ?????????? " + to_string(getRand(1, 15));
     string flight = "PO-" + to_string(getRand(1000, 9999)) + "K";
-    string pass = "������ " + to_string(getRand(1, 30)) + " �.�.";
+    string pass = "?????? " + to_string(getRand(1, 30)) + " ?.?.";
     Date d;
     d.setDate(getRand(1, 28), getRand(1, 12), getRand(2025, 2027));
 
@@ -19,8 +19,8 @@ Request Request::createFactory(int id) {
 
 string Request::toString() const {
     ostringstream oss;
-    oss << "ID: " << id << ", ����� ����������: " << destination << ", ����: " << flightNum
-        << ", ��������: " << passenger << ", ����: " << date.toString();
+    oss << "ID: " << id << ", ????? ??????????: " << destination << ", ????: " << flightNum
+        << ", ????????: " << passenger << ", ????: " << date.toString();
     return oss.str();
 }
 

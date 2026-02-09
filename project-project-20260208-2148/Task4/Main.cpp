@@ -4,10 +4,10 @@
 #include "Menu.h"
 #include "App.h"
 
-// РўРѕС‡РєР° РІС…РѕРґР° РїСЂРёР»РѕР¶РµРЅРёСЏ: РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Рё РіР»Р°РІРЅС‹Р№ С†РёРєР» РѕР±СЂР°Р±РѕС‚РєРё РєРѕРјР°РЅРґ
-// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ РѕРєСЂСѓР¶РµРЅРёРµ, С„РѕСЂРјРёСЂСѓРµС‚ РјРµРЅСЋ Рё РІС‹Р·С‹РІР°РµС‚ РјРµС‚РѕРґС‹ App РїРѕ РєРѕРјР°РЅРґР°Рј
+// Точка входа приложения: инициализация и главный цикл обработки команд
+// Инициализирует окружение, формирует меню и вызывает методы App по командам
 int main() try {
-    init(L"Task4: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
+    init(L"Task4: ???????? ????");
 
     App app;
 
@@ -27,25 +27,25 @@ int main() try {
     };
 
     vector<MenuItem> items = {
-        MenuItem(CMD_ADD, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"),
-        MenuItem(CMD_REMOVE, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ID"),
-        MenuItem(CMD_FILTER_TARIFF, "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"),
-        MenuItem(CMD_FILTER_DISCOUNT, "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"),
-        MenuItem(CMD_FILTER_SUM_RANGE, "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"),
-        MenuItem(CMD_SORT_ID, "пїЅпїЅпїЅпїЅ пїЅпїЅ ID"),
-        MenuItem(CMD_SORT_NAME, "пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ"),
-        MenuItem(CMD_SORT_SUM_DESC, "пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ."),
-        MenuItem(CMD_CHANGE, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"),
+        MenuItem(CMD_ADD, "???????? ????????"),
+        MenuItem(CMD_REMOVE, "??????? ?? ID"),
+        MenuItem(CMD_FILTER_TARIFF, "????? ?? ??????"),
+        MenuItem(CMD_FILTER_DISCOUNT, "????? ?? ??????"),
+        MenuItem(CMD_FILTER_SUM_RANGE, "????? ?? ????? ? ?????????"),
+        MenuItem(CMD_SORT_ID, "???? ?? ID"),
+        MenuItem(CMD_SORT_NAME, "???? ?? ???"),
+        MenuItem(CMD_SORT_SUM_DESC, "???? ?? ????? ????."),
+        MenuItem(CMD_CHANGE, "???????? ????????"),
         MenuItem(CMD_SAVE, "Save CSV"),
         MenuItem(CMD_LOAD, "Load CSV"),
-        MenuItem(Menu::CMD_QUIT, "пїЅпїЅпїЅпїЅпїЅ")
+        MenuItem(Menu::CMD_QUIT, "?????")
     };
 
     Menu menu(COORD{ 5, 5 }, items, mainColor, infoColor);
 
     while (true) {
         cls();
-        showNavBarMessage(hintColor, "Task4: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+        showNavBarMessage(hintColor, "Task4: ????????");
 
         int cmd = menu.navigate();
         if (cmd == Menu::CMD_QUIT) break;
@@ -64,7 +64,7 @@ int main() try {
         case CMD_LOAD: app.doLoadFromCSV(); break;
         }
 
-        getKey("\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...");
+        getKey("\n??????? ??? ???????????...");
     }
 
     cls();
@@ -75,7 +75,7 @@ catch (exception& ex) {
     cout << color(errColor)
         << pos(x, y) << setw(W) << " "
         << pos(x, y + 1) << setw(W) << " "
-        << pos(x, y + 2) << setw(W) << left << "    [пїЅпїЅпїЅпїЅпїЅпїЅ]"
+        << pos(x, y + 2) << setw(W) << left << "    [??????]"
         << pos(x, y + 3) << setw(W) << " "
         << pos(x, y + 4) << setw(W) << ("    "s + ex.what())
         << pos(x, y + 5) << setw(W) << " "

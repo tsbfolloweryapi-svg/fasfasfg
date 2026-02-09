@@ -5,11 +5,11 @@
 #include "App.h"
 
 int main() {
-    init(L"Task2: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
+    init(L"Task2: ????????? ??????");
 
     App app;
 
-    // РџРµСЂРµС‡РµРЅСЊ РєРѕРјР°РЅРґ РјРµРЅСЋ Рё РёС… РѕР±СЂР°Р±РѕС‚РєР°
+    // Перечень команд меню и их обработка
     enum Commands : int {
         CMD_FREQ_WORDS = 1001,
         CMD_FREQ_LETTERS,
@@ -20,13 +20,13 @@ int main() {
     };
 
     vector<MenuItem> items = {
-        MenuItem(CMD_FREQ_WORDS, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"),
-        MenuItem(CMD_FREQ_LETTERS, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"),
-        MenuItem(CMD_SWAP_LINES, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"),
-        MenuItem(CMD_CAPITALIZE, "Capitalize пїЅпїЅпїЅпїЅпїЅ"),
-        MenuItem(CMD_ORDER_BY_LEN, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ"),
-        MenuItem(CMD_ORDER_WORDS_IN_LINES, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"),
-        MenuItem(Menu::CMD_QUIT, "пїЅпїЅпїЅпїЅпїЅ")
+        MenuItem(CMD_FREQ_WORDS, "????????? ??????? ????"),
+        MenuItem(CMD_FREQ_LETTERS, "????????? ??????? ????"),
+        MenuItem(CMD_SWAP_LINES, "???????? ?????? ???????"),
+        MenuItem(CMD_CAPITALIZE, "Capitalize ?????"),
+        MenuItem(CMD_ORDER_BY_LEN, "??????????? ?? ?????"),
+        MenuItem(CMD_ORDER_WORDS_IN_LINES, "??????????? ????? ? ???????"),
+        MenuItem(Menu::CMD_QUIT, "?????")
     };
 
     Menu menu(COORD{ 5, 5 }, items, mainColor, infoColor);
@@ -34,7 +34,7 @@ int main() {
     while (true) {
         try {
             cls();
-            showNavBarMessage(hintColor, "Task2: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
+            showNavBarMessage(hintColor, "Task2: ????????? ??????");
 
             int cmd = menu.navigate();
             if (cmd == Menu::CMD_QUIT) break;
@@ -53,7 +53,7 @@ int main() {
             cout << color(errColor)
                 << pos(x, y) << setw(W) << " "
                 << pos(x, y + 1) << setw(W) << " "
-                << pos(x, y + 2) << setw(W) << left << "    [пїЅпїЅпїЅпїЅпїЅпїЅ]"
+                << pos(x, y + 2) << setw(W) << left << "    [??????]"
                 << pos(x, y + 3) << setw(W) << " "
                 << pos(x, y + 4) << setw(W) << ("    "s + ex.what())
                 << pos(x, y + 5) << setw(W) << " "
